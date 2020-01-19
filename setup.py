@@ -20,6 +20,7 @@ setup(name='maragi-camera',
       long_description_content_type="text/markdown",
       author='David Shapiro',
       author_email='daveshap37@gmail.com',
+      install_requires=['opencv-python',],
       license='MIT',
       packages=['maragi-camera'],
       zip_safe=False)
