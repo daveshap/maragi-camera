@@ -1,7 +1,6 @@
 import cv2
 from maragi import Client
 from time import time, sleep
-import threading
 
 
 class Microservice():
@@ -14,7 +13,7 @@ class Microservice():
         while True:
             start = time()
             ret, frame = cap.read()
-            self.client.send(frame)
+            self.client.send(frame.tolist())
             elapsed = time() - start
             delay = 1.0 / self.fps - elapsed
             sleep(delay)
@@ -23,15 +22,19 @@ class Microservice():
         self.thread = threading.Thread(target=self._transmit_loop)
         self.thread.start()
 
+    def status(self):
+        print('running:', self.thread.isAlive())
+        return self.thread.isAlive()
+
     def stop(self):
-        self.thread.stop()
+        self.thread.terminate()
         
     def original(self):
         cap = cv2.VideoCapture(0)
         while True:
             start = time()
             ret, frame = cap.read()
-            self.client.send(frame)
+            self.client.send(frame.tolist())
             elapsed = time() - start
             delay = 1.0 / self.fps - elapsed
             sleep(delay)        

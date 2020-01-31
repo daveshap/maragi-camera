@@ -5,8 +5,8 @@ Simple microservice for grabbing and publishing video images into the MARAGI ser
 # Example
 
 ```python
-import maragi-camera
-service = maragi-camera.Service()
+from maragi-camera import Service
+service = Service()
 service.list_cameras()
 service.claim_camera(1)
 service.fps = 4
